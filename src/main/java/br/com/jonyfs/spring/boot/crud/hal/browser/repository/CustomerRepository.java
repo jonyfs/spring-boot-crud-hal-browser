@@ -1,13 +1,11 @@
 package br.com.jonyfs.spring.boot.crud.hal.browser.repository;
 
 import br.com.jonyfs.spring.boot.crud.hal.browser.model.Customer;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.history.RevisionRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@Repository
-public interface CustomerRepository extends CrudRepository<Customer, Long>, QuerydslPredicateExecutor<Customer> {
-
+@RepositoryRestResource
+public interface CustomerRepository extends PagingAndSortingRepository<Customer, Long>, RevisionRepository<Customer, Long, Integer> {
     public Customer findByFirstName(String firstName);
-
 }

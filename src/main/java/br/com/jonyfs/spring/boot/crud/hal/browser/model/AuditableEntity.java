@@ -2,8 +2,10 @@ package br.com.jonyfs.spring.boot.crud.hal.browser.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import javax.persistence.Column;
 import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
@@ -25,11 +27,13 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AuditableEntity implements Serializable {
 
-    @Column(nullable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected Long id;
+
     @CreatedDate
     protected LocalDateTime createdDate;
 
-    @Column(nullable = false)
     @LastModifiedDate
     protected LocalDateTime lastModifiedDate;
 
